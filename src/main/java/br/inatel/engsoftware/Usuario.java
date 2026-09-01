@@ -8,7 +8,7 @@ public abstract class Usuario {
     private String telefone;
     private double notamedia;
 
-    // Dependência
+
     private final CriptografiaService criptografiaService;
 
     // Construtor
@@ -18,14 +18,14 @@ public abstract class Usuario {
         this.email = email;
         this.telefone = telefone;
 
-        // PRIMEIRO salvamos a dependência na classe...
+
         this.criptografiaService = criptografiaService;
 
-        // DEPOIS usamos ela para gerar o hash inicial
+
         this.senhaHash = this.criptografiaService.gerarHash(senha);
     }
 
-    // Métodos para ver e alterar os dados
+
     public String getNome() { return nome; }
     public void setNome(String nome) { this.nome = nome; }
 
@@ -35,7 +35,7 @@ public abstract class Usuario {
     public String getTelefone() { return telefone; }
     public void setTelefone(String telefone) { this.telefone = telefone; }
 
-    // Meio de login
+
     public boolean login(String emailDigitado, String senhaDigitada) {
         boolean emailCorreto = this.email.equals(emailDigitado);
         boolean senhaCorreta = this.criptografiaService.verificarSenha(senhaDigitada, this.senhaHash);
@@ -43,7 +43,7 @@ public abstract class Usuario {
         return emailCorreto && senhaCorreta;
     }
 
-    // Meio de alterar senha (Corrigido para gerar hash da novaSenha)
+
     public boolean alterarSenha(String senhaAtual, String novaSenha) {
         if (!this.criptografiaService.verificarSenha(senhaAtual, this.senhaHash)) {
             return false;
