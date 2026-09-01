@@ -34,6 +34,14 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Source: https://mvnrepository.com/artifact/org.mindrot/jbcrypt-->
+        <dependency>
+            <groupId>org.mindrot</groupId>
+            <artifactId>jbcrypt</artifactId>
+            <version>0.4</version>
+        </dependency>
+
+
     </dependencies>
 
 </project>
