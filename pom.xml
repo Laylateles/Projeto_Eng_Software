@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Identificação do projeto -->
+    <groupId>br.inatel.engsoftware</groupId>
+    <artifactId>Projeto_Eng_Software</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <!-- Configurações da versão do Java e encoding -->
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <!-- Aqui entrarão as dependências do projeto no futuro (como JUnit para testes, etc) -->
+    <dependencies>
+
+    </dependencies>
+
+</project>
