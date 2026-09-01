@@ -1,12 +1,13 @@
 package br.inatel.engsoftware;
 import org.mindrot.jbcrypt.BCrypt;
 
-public class Usuario {
+public abstract class Usuario {
     public int id;
     private String nome;
     private String email;
     private String senhaHash;
     private String telefone;
+    private double notamedia;
 
 
     // Construtor
@@ -27,14 +28,14 @@ public class Usuario {
     public String getTelefone() { return telefone; }
     public void setTelefone(String telefone) { this.telefone = telefone; }
 
-    // Método de login
+    // Meio de login
     public boolean login(String emailDigitado, String senhaDigitada) {
         boolean emailCorreto = this.email.equals(emailDigitado);
         boolean senhaCorreta = BCrypt.checkpw(senhaDigitada, this.senhaHash);
         return emailCorreto && senhaCorreta;
     }
 
-    // Método de alterar senha
+    // Meio de alterar senha
     public boolean alterarSenha(String senhaAtual, String novaSenha) {
         if (!BCrypt.checkpw(senhaAtual, this.senhaHash)) {
             System.out.println("Senha atual incorreta. Alteração não realizada.");
@@ -45,12 +46,16 @@ public class Usuario {
         return true;
     }
 
-    // Método de exibir o perfil do usuário
+    // Meio de exibir o perfil do usuário
     public void exibirPerfil() {
         System.out.println("Perfil do Usuário");
         System.out.println("ID: " + id);
         System.out.println("Nome: " + nome);
         System.out.println("Email: " + email);
         System.out.println("Telefone: " + telefone);
+    }
+
+    public void AtualizarNotaMedia(double notaMedia) {
+        this.notamedia = notaMedia;
     }
 }
