@@ -1,5 +1,4 @@
 package br.inatel.engsoftware;
-import org.mindrot.jbcrypt.BCrypt;
 
 public abstract class Usuario {
     public int id;
@@ -10,15 +9,23 @@ public abstract class Usuario {
     private double notamedia;
 
 
+    private final CriptografiaService criptografiaService;
+
     // Construtor
-    public Usuario(String nome, String email, String senha, String telefone) {
+    public Usuario(int id, String nome, String email, String senha, String telefone, CriptografiaService criptografiaService) {
+        this.id = id;
         this.nome = nome;
         this.email = email;
-        this.senhaHash = BCrypt.hashpw(senha, BCrypt.gensalt());
         this.telefone = telefone;
+
+
+        this.criptografiaService = criptografiaService;
+
+
+        this.senhaHash = this.criptografiaService.gerarHash(senha);
     }
 
-    // Métodos para ver e alterar os dados
+
     public String getNome() { return nome; }
     public void setNome(String nome) { this.nome = nome; }
 
@@ -28,21 +35,20 @@ public abstract class Usuario {
     public String getTelefone() { return telefone; }
     public void setTelefone(String telefone) { this.telefone = telefone; }
 
-    // Meio de login
+
     public boolean login(String emailDigitado, String senhaDigitada) {
         boolean emailCorreto = this.email.equals(emailDigitado);
-        boolean senhaCorreta = BCrypt.checkpw(senhaDigitada, this.senhaHash);
+        boolean senhaCorreta = this.criptografiaService.verificarSenha(senhaDigitada, this.senhaHash);
+
         return emailCorreto && senhaCorreta;
     }
 
-    // Meio de alterar senha
+
     public boolean alterarSenha(String senhaAtual, String novaSenha) {
-        if (!BCrypt.checkpw(senhaAtual, this.senhaHash)) {
-            System.out.println("Senha atual incorreta. Alteração não realizada.");
+        if (!this.criptografiaService.verificarSenha(senhaAtual, this.senhaHash)) {
             return false;
         }
-        this.senhaHash = BCrypt.hashpw(novaSenha, BCrypt.gensalt());
-        System.out.println("Senha alterada com sucesso.");
+        this.senhaHash = this.criptografiaService.gerarHash(novaSenha);
         return true;
     }
 
@@ -55,7 +61,15 @@ public abstract class Usuario {
         System.out.println("Telefone: " + telefone);
     }
 
-    public void AtualizarNotaMedia(double notaMedia) {
+    public void atualizarNotaMedia(double notaMedia) {
         this.notamedia = notaMedia;
+    }
+
+    public double getNotamedia() {
+        return notamedia;
+    }
+
+    public void setNotamedia(double notamedia) {
+        this.notamedia = notamedia;
     }
 }
