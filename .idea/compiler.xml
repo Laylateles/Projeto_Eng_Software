@@ -9,5 +9,8 @@
         <module name="Projeto_Eng_Software" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="servico" target="24" />
+    </bytecodeTargetLevel>
   </component>
 </project>
