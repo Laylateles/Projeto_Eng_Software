@@ -52,17 +52,21 @@ public abstract class Usuario {
         return true;
     }
 
-    // Meio de exibir o perfil do usuário
+
     public void exibirPerfil() {
         System.out.println("Perfil do Usuário");
         System.out.println("ID: " + id);
         System.out.println("Nome: " + nome);
         System.out.println("Email: " + email);
         System.out.println("Telefone: " + telefone);
+        System.out.println("Nota: " + notamedia);
     }
 
-    public void atualizarNotaMedia(double notaMedia) {
-        this.notamedia = notaMedia;
+    public void AtualizarNotaMedia(double notamedia) {
+        if (notamedia < 0 || notamedia > 5) {
+            throw new IllegalArgumentException("A nota média deve estar entre 0 e 5.");
+        }
+        this.notamedia = notamedia;
     }
 
     public double getNotamedia() {

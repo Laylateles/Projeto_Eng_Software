@@ -9,8 +9,9 @@ public class Prestador extends Usuario {
     private String descricao;
     private String cidade;
     private double valorHora;
-    private List<String> servicos;
-    private List<Avaliacao> avaliacoesRecebidas;
+    private final List<String> servicos;
+    private final List<Avaliacao> avaliacoesRecebidas;
+    private double notamedia;
 
     public Prestador(int id, String nome, String email, String senha, String telefone,
                      CriptografiaService criptografiaService,
@@ -37,12 +38,30 @@ public class Prestador extends Usuario {
     public double getValorHora() { return valorHora; }
     public void setValorHora(double valorHora) { this.valorHora = valorHora; }
 
+    public double getNotamedia() { return notamedia; }
+
     public List<String> getServicos() { return servicos; }
 
     public void cadastrarServico(String servico) {
         if (servico != null && !servico.isBlank() && !servicos.contains(servico)) {
             servicos.add(servico);
         }
+    }
+
+    public void calcularEAtualizarMedia(){
+        if(avaliacoesRecebidas.isEmpty()){
+            super.AtualizarNotaMedia(0.0);
+            return;
+        }
+
+        double soma = 0.0;
+
+        for (Avaliacao avaliacao : avaliacoesRecebidas) {
+            soma += avaliacao.getNota();
+        }
+
+       super.AtualizarNotaMedia(soma/avaliacoesRecebidas.size());
+
     }
 
     public void removerServico(String servico) {
@@ -54,7 +73,10 @@ public class Prestador extends Usuario {
     }
 
     public void receberAvaliacao(Avaliacao avaliacao) {
-        avaliacoesRecebidas.add(avaliacao);
+        if (avaliacao != null) {
+            avaliacoesRecebidas.add(avaliacao);
+            calcularEAtualizarMedia();
+        }
     }
 
     @Override
@@ -65,5 +87,6 @@ public class Prestador extends Usuario {
         System.out.println("Cidade: " + cidade);
         System.out.println("Valor/hora: R$ " + valorHora);
         System.out.println("Serviços: " + servicos);
+        System.out.println("Nota meia: " + notamedia);
     }
 }

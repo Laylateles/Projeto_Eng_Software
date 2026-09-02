@@ -71,7 +71,7 @@ public class UsuarioTest {
 
     @Test
     void testeAtualizarNotaMedia(){
-        usuario.atualizarNotaMedia(8.5);
+        usuario.AtualizarNotaMedia(8.5);
 
         Assertions.assertEquals(8.5, usuario.getNotamedia());
     }
