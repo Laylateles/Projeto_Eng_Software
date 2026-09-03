@@ -22,7 +22,7 @@ public class Contratante extends Usuario {
         if (avaliado == null || avaliado.getId()== this.getId()) {
             return null;
         }
-        Avaliacao avaliacao = new Avaliacao(this.getId(), avaliado.getId(), nota, comentario, LocalDate.now());
+        Avaliacao avaliacao = new Avaliacao(0,this.getId(), avaliado.getId(), nota, comentario, LocalDate.now());
         if (!avaliacao.validar()) {
             return null;
         }
