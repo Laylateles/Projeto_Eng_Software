@@ -29,7 +29,7 @@ public class Avaliacao {
     public String getComentario() { return comentario; }
     public LocalDate getData() { return data; }
 
-    /** Nota entre 1 e 5, autor diferente do avaliado e data preenchida. */
+
     public boolean validar() {
         return nota >= 1 && nota <= 5
                 && idAutor != idAvaliado
